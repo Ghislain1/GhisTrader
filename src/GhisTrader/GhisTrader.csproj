@@ -7,4 +7,10 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GhisTrader.Domain\GhisTrader.Domain.csproj" />
+    <ProjectReference Include="..\GhisTrader.EntityFramework\GhisTrader.EntityFramework.csproj" />
+    <ProjectReference Include="..\GhisTrader.FinancialDomainAPI\GhisTrader.FinancialDomainAPI.csproj" />
+  </ItemGroup>
+
 </Project>

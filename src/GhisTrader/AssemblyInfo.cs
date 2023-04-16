@@ -1,6 +1,14 @@
+// <copyright company="Ghislain One Inc.">
+//  Copyright (c) GhislainOne
+//  This computer program includes confidential, proprietary
+//  information and is a trade secret of GhislainOne. All use,
+//  disclosure, or reproduction is prohibited unless authorized in
+//  writing by an officer of Ghis. All Rights Reserved.
+// </copyright>
+
 using System.Windows;
 
-[assembly:ThemeInfo(
+[assembly: ThemeInfo(
     ResourceDictionaryLocation.None, //where theme specific resource dictionaries are located
                                      //(used if a resource is not found in the page,
                                      // or application resource dictionaries)

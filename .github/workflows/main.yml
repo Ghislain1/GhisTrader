@@ -21,7 +21,7 @@ jobs:
           dotnet-version: 6.0.x
 
       - name: Publish (Release Mode)
-        run: dotnet publish Metatrader4ClientApp/ -o ${{ github.workspace }}/bin/Publish --configuration Release -r win-x64 --self-contained true /p:PublishSingleFile=true /p:PublishReadyToRun=true
+        run: dotnet publish GhisTrader/ -o ${{ github.workspace }}/bin/Publish --configuration Release -r win-x64 --self-contained true /p:PublishSingleFile=true /p:PublishReadyToRun=true
 
       - name: Generate changelog
         run: echo "#Good things are comming" > ${{github.workspace}}-CHANGELOG.txt
@@ -37,7 +37,7 @@ jobs:
       - name: Publish your  package
         uses: actions/upload-artifact@v3
         with:
-          name: Metatrader4ClientApp
+          name: GhisTrader
           path: ${{ github.workspace }}/bin/Publish
           if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
   deploy:
@@ -48,11 +48,11 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v3
         with:
-          name: Metatrader4ClientApp
-          path: Metatrader4ClientApp
+          name: GhisTrader
+          path: GhisTrader
 
       - name: Create package
-        run: Compress-Archive -Path Metatrader4ClientApp/* -DestinationPath Metatrader4ClientApp.zip -Force
+        run: Compress-Archive -Path GhisTrader/* -DestinationPath GhisTrader.zip -Force
         shell: pwsh
 
       - name: Create release
@@ -64,7 +64,7 @@ jobs:
           tag_name: ${{ github.ref }} # How to set  tag name?
           release_name: ${{ github.ref }} # How to set  release name?
           body: |
-            [Changelog](https://github.com/Ghislain1/Metatrader4ClientApp/blob/master/CHANGELOG.md)
+            [Changelog](https://github.com/Ghislain1/GhisTrader/blob/master/CHANGELOG.md)
           draft: true # Later to false
           prerelease: true # Later to false
 
@@ -74,6 +74,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_name: Metatrader4ClientApp.zip
-          asset_path: Metatrader4ClientApp.zip
+          asset_name: GhisTrader.zip
+          asset_path: GhisTrader.zip
           asset_content_type: application/zip
