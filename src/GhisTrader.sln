@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31423.177
+MinimumVisualStudioVersion = 10.0.40219.1
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+	
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {42D9B723-A5FD-453D-B056-9B2XFD43B30A}
+	EndGlobalSection
+EndGlobal
