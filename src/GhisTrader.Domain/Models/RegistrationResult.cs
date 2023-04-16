@@ -6,10 +6,19 @@
 //  writing by an officer of Ghis. All Rights Reserved.
 // </copyright>
 
-namespace GhisTrader.EntityFramework
+namespace GhisTrader.Domain.Models
 {
-    public class Class1
-    {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
 
+    public enum RegistrationResult
+    {
+        Success,
+        PasswordsDoNotMatch,
+        EmailAlreadyExists,
+        UsernameAlreadyExists
     }
 }

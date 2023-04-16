@@ -10,8 +10,4 @@
     <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.3" />
   </ItemGroup>
 
-<ItemGroup>
-  <Folder Include="Models\" />
-</ItemGroup>
-
 </Project>
