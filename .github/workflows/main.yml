@@ -1,0 +1,79 @@
+name: main
+
+on: [push, pull_request] # Trigger when someone pushs or dens PR
+
+# 3 Jobs, packages, deploy, notify
+jobs:
+  package:
+    runs-on: windows-latest
+    env:
+      DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+      DOTNET_NOLOGO: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 6.0.x
+
+      - name: Publish (Release Mode)
+        run: dotnet publish Metatrader4ClientApp/ -o ${{ github.workspace }}/bin/Publish --configuration Release -r win-x64 --self-contained true /p:PublishSingleFile=true /p:PublishReadyToRun=true
+
+      - name: Generate changelog
+        run: echo "#Good things are comming" > ${{github.workspace}}-CHANGELOG.txt
+
+      - name: Dispay some values
+        run: |
+          echo  "ref_type ====> ${{github.ref_type }}"
+          echo  " workspace====> ${{ github.workspace }}"
+          echo  "  github.ref ====> ${{  github.ref}}"
+          echo  " event_name ====> ${{ github.event_name}}"
+          more  ${{github.workspace}}-CHANGELOG.txt
+
+      - name: Publish your  package
+        uses: actions/upload-artifact@v3
+        with:
+          name: Metatrader4ClientApp
+          path: ${{ github.workspace }}/bin/Publish
+          if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
+  deploy:
+    if: ${{ github.event_name == 'push' && github.ref_type == 'branch' }}
+    needs: package # Dependent of jobs packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: Metatrader4ClientApp
+          path: Metatrader4ClientApp
+
+      - name: Create package
+        run: Compress-Archive -Path Metatrader4ClientApp/* -DestinationPath Metatrader4ClientApp.zip -Force
+        shell: pwsh
+
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }} # How to set  tag name?
+          release_name: ${{ github.ref }} # How to set  release name?
+          body: |
+            [Changelog](https://github.com/Ghislain1/Metatrader4ClientApp/blob/master/CHANGELOG.md)
+          draft: true # Later to false
+          prerelease: true # Later to false
+
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_name: Metatrader4ClientApp.zip
+          asset_path: Metatrader4ClientApp.zip
+          asset_content_type: application/zip
