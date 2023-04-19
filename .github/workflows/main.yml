@@ -21,7 +21,7 @@ jobs:
           dotnet-version: 6.0.x
 
       - name: Publish (Release Mode)
-        run: dotnet publish GhisTrader/ -o ${{ github.workspace }}/bin/Publish --configuration Release -r win-x64 --self-contained true /p:PublishSingleFile=true /p:PublishReadyToRun=true
+        run: dotnet publish GhisTrader/src -o ${{ github.workspace }}/bin/Publish --configuration Release -r win-x64 --self-contained true /p:PublishSingleFile=true /p:PublishReadyToRun=true
 
       - name: Generate changelog
         run: echo "#Good things are comming" > ${{github.workspace}}-CHANGELOG.txt
