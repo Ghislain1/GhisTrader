@@ -56,28 +56,16 @@ jobs:
           path: GhisTrader
 
       - name: Create Zip File(GhisTrader.zip)
+        id: zip_output
         run: Compress-Archive -Path GhisTrader/* -DestinationPath GhisTrader.zip -Force
         shell: pwsh
-
-      - name: Create release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }} # How to set  tag name?
-          release_name: ${{ github.ref }} # How to set  release name?
-          body: |
-            [Changelog](https://github.com/Ghislain1/GhisTrader/blob/master/CHANGELOG.md)
-          draft: true # Later to false
-          prerelease: true # Later to false
 
       - name: Upload release asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          upload_url: ${{ steps.zip_output.outputs.upload_url }}
           asset_name: GhisTrader.zip
           asset_path: GhisTrader.zip
           asset_content_type: application/zip
