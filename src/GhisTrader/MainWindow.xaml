@@ -7,6 +7,32 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
 
+      <!-- NavigationBar : Visible or not -->
+    <Grid Grid.Row="0">
+      <Grid.Style>
+        <Style TargetType="Grid">
+          <Style.Triggers>
+            <DataTrigger Binding="{Binding IsLoggedIn}"
+                         Value="False">
+              <Setter Property="Visibility"
+                      Value="Collapsed" />
+            </DataTrigger>
+          </Style.Triggers>
+        </Style>
+      </Grid.Style>
+      <TextBlock Text="HALLLO Naivgation Bar kommt here"></TextBlock>
+    </Grid>
+
+    <ScrollViewer Grid.Row="1"
+                  VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Disabled">
+           <!--ContentControl due to DataTemplate  in App.xaml-->
+      <ContentControl Content="{Binding CurrentViewModel}" />
+    </ScrollViewer>
     </Grid>
 </Window>
