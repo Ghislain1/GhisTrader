@@ -33,6 +33,7 @@ public partial class App : Application
     public static IHostBuilder CreateHostBuider(string[]? args = null)
     {
         return Host.CreateDefaultBuilder(args)
+             .AddSingletonServices()
                .AddViewModels()
                .AddViews();
     }

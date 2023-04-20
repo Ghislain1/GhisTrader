@@ -8,7 +8,10 @@
 
 namespace GhisTrader;
 
+using GhisTrader.Authenticators;
 using GhisTrader.Extensions;
+using GhisTrader.Navigators;
+using GhisTrader.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,16 +22,22 @@ using System.Threading.Tasks;
 public class MainViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
+    private INotifyPropertyChanged? currentViewModel;
     private bool isLoggedIn;
-    public MainViewModel()
+    private  readonly INavigator navigator;
+    private readonly IAuthenticator authenticator;
+    public MainViewModel(INavigator navigator, IAuthenticator authenticator)
     {
-        this.LoadAsync();
+        this.navigator =navigator;
+        this.authenticator = authenticator;
+        this.CurrentViewModel = new LoginViewModel();
+        
     }
 
     private async void LoadAsync()
     {
         int s = 0;
-        while(s < 100)
+        while (s < 100)
         {
             await Task.Delay(1000);
             s++;
@@ -36,10 +45,17 @@ public class MainViewModel : INotifyPropertyChanged
         }
     }
 
-    public  bool IsLoggedIn
+    public bool IsLoggedIn
     {
         get => this.isLoggedIn;
-        set => this.InvokePropertyChanged(this.PropertyChanged, ref this.isLoggedIn , value);
+        set => this.InvokePropertyChanged(this.PropertyChanged, ref this.isLoggedIn, value);
     }
+    public INotifyPropertyChanged? CurrentViewModel
+    {
+        get => this.currentViewModel;
+        set => this.InvokePropertyChanged(this.PropertyChanged, ref this.currentViewModel, value);
+    }
+
+   
 }
 
