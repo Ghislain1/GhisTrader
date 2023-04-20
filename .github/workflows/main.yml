@@ -2,9 +2,9 @@ name: main
 
 on: [push, pull_request] # Trigger when someone pushs or dens PR
 
-# 3 Jobs, packages, deploy, notify
+# 3 Jobs, release, deploy, notify
 jobs:
-  package:
+  release:
     runs-on: windows-latest
     env:
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
@@ -23,25 +23,22 @@ jobs:
       - name: Publish (Release Mode)
         run: |
           dir
-          echo  "ref_type ====> ${{github.ref_type }}"
-          echo  "workspace====> ${{ github.workspace }}"
-          echo  "github.ref ====> ${{  github.ref}}"
-          echo  "event_name ====> ${{ github.event_name}}"
           cd ./src/GhisTrader
           dotnet publish -v d  -o ${{ github.workspace }}/bin/Publish --configuration Release -r win-x64 --self-contained true /p:PublishSingleFile=true /p:PublishReadyToRun=true
 
       - name: Generate changelog
         run: echo "#Good things are comming" > ${{github.workspace}}-CHANGELOG.txt
 
-      - name: Dispay some values
+      - name: Display Build-In Variables values(Workflow)
         run: |
-          echo  "ref_type ====> ${{github.ref_type }}"
-          echo  " workspace====> ${{ github.workspace }}"
-          echo  "  github.ref ====> ${{  github.ref}}"
-          echo  " event_name ====> ${{ github.event_name}}"
+          echo  "  "
+          echo  "ref_type   ====> ${{github.ref_type }}"
+          echo  "workspace  ====> ${{github.workspace }}"
+          echo  "github.ref ====> ${{github.ref}}"
+          echo  "event_name ====> ${{github.event_name}}"
           more  ${{github.workspace}}-CHANGELOG.txt
 
-      - name: Publish your  package
+      - name: Publish your  Release
         uses: actions/upload-artifact@v3
         with:
           name: GhisTrader
@@ -49,7 +46,7 @@ jobs:
           if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
   deploy:
     if: ${{ github.event_name == 'push' && github.ref_type == 'branch' }}
-    needs: package # Dependent of jobs packages
+    needs: release # Dependent of jobs release
     runs-on: ubuntu-latest
     steps:
       - name: Download artifacts
@@ -58,7 +55,7 @@ jobs:
           name: GhisTrader
           path: GhisTrader
 
-      - name: Create package
+      - name: Create Zip File(GhisTrader.zip)
         run: Compress-Archive -Path GhisTrader/* -DestinationPath GhisTrader.zip -Force
         shell: pwsh
 
