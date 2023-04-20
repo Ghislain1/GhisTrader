@@ -7,14 +7,48 @@
 // </copyright>
 
 namespace GhisTrader.ViewModels;
+
+using GhisTrader.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 public class LoginViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
+
+    private  string ?password;
+    private string? useranme;
+    public LoginViewModel()
+    {
+        this.LoginCommand = new RelayCommand(this.ExecuteLogin, _=> this.CanLogin);
+    }
+
+    private void ExecuteLogin(object obj)
+    {
+        throw new NotImplementedException();
+    }
+
+    public string? Useranme
+    {
+        get => this.useranme;
+        set => this.InvokePropertyChanged(this.PropertyChanged, ref this.useranme, value);
+    }
+    public ICommand LoginCommand { get; }
+    public string? Password
+    {
+        get => this.password;
+        set
+        {
+            if(this.InvokePropertyChanged(this.PropertyChanged, ref this.password, value))
+            {
+                this.InvokePropertyChanged(this.PropertyChanged, nameof(this.CanLogin));
+            }
+        }
+    }
+    public bool CanLogin => !string.IsNullOrWhiteSpace(this.Useranme) && !string.IsNullOrWhiteSpace(this.Password);
 }

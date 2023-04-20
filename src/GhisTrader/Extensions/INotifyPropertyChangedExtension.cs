@@ -37,6 +37,31 @@ public static class INotifyPropertyChangedExtension
         propertyNames?.ToList().ForEach(item => handler(item));
        
     }
+    public static void InvokePropertyChanged<TSender>(this TSender sender, PropertyChangedEventHandler ?handler, [CallerMemberName]string  propertyName="") where TSender : INotifyPropertyChanged
+    {
+     
+        if (handler is null)
+        {
+            return;
+        }
+      handler((object)sender, new PropertyChangedEventArgs(propertyName));
+
+    }
+    public static void InvokePropertyChanged<TSender>(this TSender sender, NotifyPropertyChangedHandler handler,  string propertyName) where TSender : INotifyPropertyChanged
+    {
+        NotifyPropertyChangedHandler notifyPropertyChnagedHandler = handler;
+        if (handler is null)
+        {
+            return;
+        }
+        if (string.IsNullOrWhiteSpace(propertyName))
+        {
+            return;
+        }
+        notifyPropertyChnagedHandler(propertyName);
+
+    }
+
     public static bool InvokePropertyChanged<TSender, TProperty>(this TSender sender, PropertyChangedEventHandler? @event, ref TProperty old, TProperty @new, Func<(TProperty, TProperty), bool> areEqual, [CallerMemberName] string propertyName = "") where TSender : INotifyPropertyChanged
     {
         if (areEqual is null)
