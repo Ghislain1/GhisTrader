@@ -49,6 +49,7 @@ public partial class App : Application
     protected override async void OnExit(ExitEventArgs exitEventArgs)
     {
         await this.host?.StopAsync();
+
         this.host?.Dispose();
         base.OnExit(exitEventArgs);
     }

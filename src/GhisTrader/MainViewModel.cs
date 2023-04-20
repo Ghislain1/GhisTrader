@@ -7,6 +7,8 @@
 // </copyright>
 
 namespace GhisTrader;
+
+using GhisTrader.Extensions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,5 +19,27 @@ using System.Threading.Tasks;
 public class MainViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
+    private bool isLoggedIn;
+    public MainViewModel()
+    {
+        this.LoadAsync();
+    }
+
+    private async void LoadAsync()
+    {
+        int s = 0;
+        while(s < 100)
+        {
+            await Task.Delay(1000);
+            s++;
+            this.IsLoggedIn = !IsLoggedIn;
+        }
+    }
+
+    public  bool IsLoggedIn
+    {
+        get => this.isLoggedIn;
+        set => this.InvokePropertyChanged(this.PropertyChanged, ref this.isLoggedIn , value);
+    }
 }
 
