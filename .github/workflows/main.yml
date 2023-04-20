@@ -24,10 +24,10 @@ jobs:
         run: |
           dir
           echo  "ref_type ====> ${{github.ref_type }}"
-          echo  " workspace====> ${{ github.workspace }}"
-          echo  "  github.ref ====> ${{  github.ref}}"
-          echo  " event_name ====> ${{ github.event_name}}"
-          cd /src/GhisTrader
+          echo  "workspace====> ${{ github.workspace }}"
+          echo  "github.ref ====> ${{  github.ref}}"
+          echo  "event_name ====> ${{ github.event_name}}"
+          cd ./src/GhisTrader
           dotnet publish -v d  -o ${{ github.workspace }}/bin/Publish --configuration Release -r win-x64 --self-contained true /p:PublishSingleFile=true /p:PublishReadyToRun=true
 
       - name: Generate changelog
