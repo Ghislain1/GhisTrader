@@ -13,12 +13,8 @@ namespace GhisTrader.Domain.Models
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-
-    public class User : DomainObject
+    public abstract class EntityBase
     {
-        public string Email { get; set; }
-        public string Username { get; set; }
-        public string PasswordHash { get; set; }
-        public DateTime DatedJoined { get; set; }
+        public int Id { get; set; }
     }
 }

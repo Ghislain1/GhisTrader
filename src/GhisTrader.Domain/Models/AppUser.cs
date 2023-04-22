@@ -7,14 +7,22 @@
 // </copyright>
 
 namespace GhisTrader.Domain.Models;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class Asset  
+public class AppUser : EntityBase
 {
-    public string Symbol { get; set; }
-    public double PricePerShare { get; set; }
+    public string? Email { get; set; }
+    public string? Username { get; set; }
+    public string ?PasswordHash { get; set; }
+    public DateTime DatedJoined { get; set; }
+
+    //Foreign
+    //public int AccountId { get; set; }         
+    public Account? Account { get; set; }
+    
 }

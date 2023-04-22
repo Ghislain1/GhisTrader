@@ -6,18 +6,22 @@
 //  writing by an officer of Ghis. All Rights Reserved.
 // </copyright>
 
-namespace GhisTrader.Domain.Models
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+namespace GhisTrader.Domain.Models;
 
-    public class Account : DomainObject
-    {
-        public User AccountHolder { get; set; }
-        public double Balance { get; set; }
-        public ICollection<AssetTransaction> AssetTransactions { get; set; }
-    }
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+public class Account : EntityBase
+{
+
+    public double Balance { get; set; }
+    public ICollection<AssetTransaction>? AssetTransactions { get; set; }
+
+    // Foreign
+    //public AppUser AppUserId { get; set; }
+    // public AppUser AccountHolder { get; set; }
+    public AppUser? AppUser { get; set; }
 }

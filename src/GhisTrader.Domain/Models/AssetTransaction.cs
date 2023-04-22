@@ -15,7 +15,7 @@ namespace GhisTrader.Domain.Models
     using System.Text;
     using System.Threading.Tasks;
 
-    public class AssetTransaction : DomainObject
+    public class AssetTransaction : EntityBase
     {
         public Account Account { get; set; }
         public bool IsPurchase { get; set; }
