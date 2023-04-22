@@ -26,8 +26,11 @@ namespace GhisTrader.EntityFramework.DbContexts
         //  Second way to create Your context( best way for WPF)
         public AppUserDbContext() : base() { }
 
-        public DbSet<AppUser> AppUsers => Set<AppUser>();
+        // public DbSet<AppUser> AppUsers => Set<AppUser>();
+        public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<AssetTransaction> AssetTransactions { get; set; }
+        public DbSet<Asset> Assets { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Data Source=appUsers.db");
@@ -37,16 +40,26 @@ namespace GhisTrader.EntityFramework.DbContexts
         {
             //AppUser
             var appUser = this.Create<AppUser>(builder);
-            appUser.HasOne(user => user.Account);
-                  
+            appUser.HasOne(x => x.Account)
+                   .WithOne(x => x.AppUser)
+                   .HasForeignKey<Account>(x => x.AppUserId);
+
+
+
 
             // Account
             var account = this.Create<Account>(builder);
-            account.HasOne(x => x.AppUser);
+            //account.HasOne(x => x.AppUser)
+            //    .WithOne(x=> x.Account)
+            //    .HasForeignKey<AppUser>(x=> x.AccountId);
 
+            // AssetTransaction
+            var assetTransaction = this.Create<AssetTransaction>(builder);
+            assetTransaction.HasOne(x => x.Asset);
 
-
-
+            // Asset
+            var asset = this.Create<Asset>(builder);
+            //asset.HasOne(x => x.Asset);
 
             base.OnModelCreating(builder);
         }
@@ -54,7 +67,7 @@ namespace GhisTrader.EntityFramework.DbContexts
         {
             var entity = modelBuilder.Entity<TEntity>();
             entity.HasKey(x => x.Id);
-            entity.ToTable($"{nameof(TEntity)}s");
+            //entity.ToTable($"{nameof(TEntity)}s");
             return entity;
 
         }

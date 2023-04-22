@@ -21,7 +21,7 @@ public class Account : EntityBase
     public ICollection<AssetTransaction>? AssetTransactions { get; set; }
 
     // Foreign
-    //public AppUser AppUserId { get; set; }
+    public int AppUserId { get; set; }
     // public AppUser AccountHolder { get; set; }
-    public AppUser? AppUser { get; set; }
+    public AppUser AppUser { get; set; }
 }

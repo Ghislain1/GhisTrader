@@ -13,7 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class Asset  
+public class Asset  : EntityBase
 {
     public string Symbol { get; set; }
     public double PricePerShare { get; set; }
