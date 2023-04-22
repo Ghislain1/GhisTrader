@@ -35,24 +35,19 @@ public class MainViewModel : INotifyPropertyChanged
         this.authenticator = authenticator;
         this.navigator.StateChanged += () =>
         {
-
+            this.CurrentViewModel = this.navigator.CurrentViewModel;
 
         };
-        this.authenticator.StateChanged += () => { };
-        this.CurrentViewModel = this.traderViewModelFactory.CreateViewModel(ViewType.Login);
-
-    }
-
-    private async void LoadAsync()
-    {
-        int s = 0;
-        while (s < 100)
+        this.authenticator.StateChanged += () =>
         {
-            await Task.Delay(1000);
-            s++;
-            this.IsLoggedIn = !IsLoggedIn;
-        }
+
+        };
+
+        //  this.navigator.CurrentViewModel=
+        this.navigator.CurrentViewModel = this.traderViewModelFactory.CreateViewModel(ViewType.Login);
+
     }
+
 
     public bool IsLoggedIn
     {

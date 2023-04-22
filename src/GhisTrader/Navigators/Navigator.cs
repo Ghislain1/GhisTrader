@@ -21,17 +21,18 @@ public class Navigator : INavigator
 
     private INotifyPropertyChanged? currentViewModel;
 
-    public INotifyPropertyChanged CurrentViewModel
+    public INotifyPropertyChanged? CurrentViewModel
     {
         get
         {
-            return this.CurrentViewModel;
+            return this.currentViewModel;
         }
         set
         {
-            this.currentViewModel = value;
+
             if (this.currentViewModel != value)
             {
+                this.currentViewModel = value;
                 this.StateChanged?.Invoke();
             }
         }

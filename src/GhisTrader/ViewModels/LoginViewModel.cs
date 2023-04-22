@@ -24,7 +24,7 @@ public class LoginViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
     private readonly IRenavigator? loginRenavigator;
-    private readonly IRenavigator? renavigator;
+
     private readonly IRenavigator? registerRenavigator;
     private readonly IAuthenticator? authenticator;
     private string? password;
@@ -36,6 +36,9 @@ public class LoginViewModel : INotifyPropertyChanged
         this.registerRenavigator = registerRenavigator;
         this.LoginCommand = new RelayCommand(this.ExecuteLogin, () => this.CanLogin).ObservesProperty(() => this.CanLogin);
         this.ViewRegisterCommand = new RelayCommand(this.ExecuteViewRegister).ObservesProperty(() => this.CanLogin);
+
+
+
     }
 
 
@@ -67,6 +70,6 @@ public class LoginViewModel : INotifyPropertyChanged
 
     private void ExecuteViewRegister()
     {
-        this.renavigator?.Renavigate();
+        this.registerRenavigator?.Renavigate();
     }
 }

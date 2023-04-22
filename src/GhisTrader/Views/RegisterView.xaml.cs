@@ -26,9 +26,9 @@ using System.Windows.Shapes;
 /// <summary>
 /// Interaction logic for LoginView.xaml
 /// </summary>
-public partial class LoginView : UserControl
+public partial class RegisterView : UserControl
 {
-    public LoginView()
+    public RegisterView()
     {
         InitializeComponent();
     }

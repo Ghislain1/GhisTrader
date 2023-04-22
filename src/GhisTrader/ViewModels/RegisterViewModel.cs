@@ -20,13 +20,17 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 public class RegisterViewModel : INotifyPropertyChanged
 {
+    private readonly IRenavigator? loginRenavigator;
+    private readonly IRenavigator? registerRenavigator;
+    private readonly IAuthenticator? authenticator;
+    private string? email;
     public RegisterViewModel(IAuthenticator authenticator, IRenavigator registerRenavigator, IRenavigator loginRenavigator)
     {
         //ErrorMessageViewModel = new MessageViewModel();
 
-        // TODO
-        // RegisterCommand = new RegisterCommand(this, authenticator, registerRenavigator);
-        //ViewLoginCommand = new RenavigateCommand(loginRenavigator);
+        this.authenticator = authenticator;
+        this.registerRenavigator = registerRenavigator;
+        this.loginRenavigator = loginRenavigator;
 
         this.RegisterCommand = new RelayCommand(this.ExecuteRegister, () => this.CanRegister).ObservesProperty(() => this.CanRegister);
         this.ViewLoginCommand = new RelayCommand(this.ExecuteViewLogin).ObservesProperty(() => this.CanRegister);
@@ -34,16 +38,16 @@ public class RegisterViewModel : INotifyPropertyChanged
 
     private void ExecuteViewLogin()
     {
-        throw new NotImplementedException();
+        this.loginRenavigator?.Renavigate();
     }
 
     private void ExecuteRegister()
     {
-        throw new NotImplementedException();
+
     }
 
-    private string email;
-    public string Email
+  
+    public string? Email
     {
         get
         {

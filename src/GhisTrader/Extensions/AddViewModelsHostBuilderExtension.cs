@@ -35,6 +35,7 @@ public static class AddViewModelsHostBuilderExtension
             services.AddSingleton<CreateViewModel<HomeViewModel>>(services => () => services.GetRequiredService<HomeViewModel>());
             services.AddTransient<PortfolioViewModel>();
             services.AddTransient<BuyViewModel>();
+            services.AddTransient<HomeViewModel>();
 
 
             // Add VM i.e.LoginViewModel

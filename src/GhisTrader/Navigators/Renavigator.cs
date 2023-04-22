@@ -19,6 +19,7 @@ using System.Threading.Tasks;
 public class Renavigator<TViewModel> : IRenavigator where TViewModel : INotifyPropertyChanged
 {
     private readonly INavigator navigator;
+
     // TODO@Ze can replace with action ?
     private readonly CreateViewModel<TViewModel> createViewModel;
     public Renavigator(INavigator navigator, CreateViewModel<TViewModel> createViewModel)
