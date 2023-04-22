@@ -33,9 +33,10 @@ public class MainViewModel : INotifyPropertyChanged
         this.traderViewModelFactory = traderViewModelFactory;
         this.navigator = navigator;
         this.authenticator = authenticator;
-        this.navigator.StateChanged += () => {
+        this.navigator.StateChanged += () =>
+        {
 
-        
+
         };
         this.authenticator.StateChanged += () => { };
         this.CurrentViewModel = this.traderViewModelFactory.CreateViewModel(ViewType.Login);

@@ -35,11 +35,11 @@ public static class AddSingletonServicesHostBuilderExtension
             services.AddSingleton<ITraderDbContextFactory, TraderDbContextFactory>();
 
             // TODO: Understand
-            services.AddSingleton<IAccountStore, AccountStore>();    
+            services.AddSingleton<IAccountStore, AccountStore>();
 
             services.AddSingleton<IPasswordHasher<AppUser>, PasswordHasher<AppUser>>();
-
-            services.AddSingleton<IAuthenticationService, AuthenticationService>();
+            // Why 2 because IAuthenticationService exists by Microsoft
+            services.AddSingleton<IAuthenticationService2, AuthenticationService2>();
             services.AddSingleton<IDataService<Account>, AccountDataService>();
             services.AddSingleton<IAccountService, AccountDataService>();
             services.AddSingleton<IStockPriceService, StockPriceService>();

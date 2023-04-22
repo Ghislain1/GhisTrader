@@ -17,7 +17,7 @@ namespace GhisTrader.Authenticators
 
     public interface IAccountStore
     {
-        Account ?CurrentAccount { get; set; }
+        Account? CurrentAccount { get; set; }
         event Action AccountChanged;
     }
 }
