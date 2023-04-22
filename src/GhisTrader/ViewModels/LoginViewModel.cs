@@ -10,6 +10,7 @@ namespace GhisTrader.ViewModels;
 
 using GhisTrader.Authenticators;
 using GhisTrader.Commands;
+using GhisTrader.Domain.Exceptions;
 using GhisTrader.Extensions;
 using GhisTrader.Navigators;
 using System;
@@ -28,7 +29,8 @@ public class LoginViewModel : INotifyPropertyChanged
     private readonly IRenavigator? registerRenavigator;
     private readonly IAuthenticator? authenticator;
     private string? password;
-    private string? userName;
+    private string? username;
+    private string? errorMessage;
     public LoginViewModel(IAuthenticator authenticator, IRenavigator loginRenavigator, IRenavigator registerRenavigator)
     {
         this.authenticator = authenticator;
@@ -36,19 +38,16 @@ public class LoginViewModel : INotifyPropertyChanged
         this.registerRenavigator = registerRenavigator;
         this.LoginCommand = new RelayCommand(this.ExecuteLogin, () => this.CanLogin).ObservesProperty(() => this.CanLogin);
         this.ViewRegisterCommand = new RelayCommand(this.ExecuteViewRegister).ObservesProperty(() => this.CanLogin);
-
-
-
     }
 
 
     public ICommand LoginCommand { get; }
     public ICommand ViewRegisterCommand { get; }
 
-    public string? UserName
+    public string? Username
     {
-        get => this.userName;
-        set => this.InvokePropertyChanged(this.PropertyChanged, ref this.userName, value);
+        get => this.username;
+        set => this.InvokePropertyChanged(this.PropertyChanged, ref this.username, value);
     }
     public string? Password
     {
@@ -61,11 +60,41 @@ public class LoginViewModel : INotifyPropertyChanged
             }
         }
     }
-    public bool CanLogin => !string.IsNullOrWhiteSpace(this.UserName) && !string.IsNullOrWhiteSpace(this.Password);
-
-    private void ExecuteLogin()
+    public string? ErrorMessage
     {
+        get => this.errorMessage;
+        set => this.InvokePropertyChanged(this.PropertyChanged, ref this.errorMessage, value);
 
+    }
+    public bool CanLogin => !string.IsNullOrWhiteSpace(this.Username) && !string.IsNullOrWhiteSpace(this.Password);
+
+    private async void ExecuteLogin()
+    {
+        await Task.Run(() => DoLoginAsync());
+    }
+
+    private async Task DoLoginAsync()
+    {
+        this.ErrorMessage = string.Empty;
+
+        try
+        {
+            await this.authenticator?.Login(this.Username!, this.Password!);
+
+            this.loginRenavigator?.Renavigate();
+        }
+        catch (UserNotFoundException)
+        {
+            this.ErrorMessage = "Username does not exist.";
+        }
+        catch (InvalidPasswordException)
+        {
+            this.ErrorMessage = "Incorrect password.";
+        }
+        catch (Exception)
+        {
+            this.ErrorMessage = "Login failed.";
+        }
     }
 
     private void ExecuteViewRegister()

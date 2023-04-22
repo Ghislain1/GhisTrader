@@ -17,4 +17,13 @@ using System.Threading.Tasks;
 public class HomeViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
+
+    public AssetSummaryViewModel AssetSummaryViewModel { get; }
+    public MajorIndexListingViewModel MajorIndexListingViewModel { get; }
+
+    public HomeViewModel(AssetSummaryViewModel assetSummaryViewModel, MajorIndexListingViewModel majorIndexListingViewModel)
+    {
+        AssetSummaryViewModel = assetSummaryViewModel;
+        MajorIndexListingViewModel = majorIndexListingViewModel;
+    }
 }

@@ -65,7 +65,7 @@
                      Text="Username" />
           <TextBox Grid.Column="1"
                    Margin="20 0 0 0"
-                   Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged}" />
+                   Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
 
         <Grid Grid.Row="1"
@@ -101,8 +101,7 @@
 
         <TextBlock Grid.Row="4"
                    Margin="0 10 0 0"
-                   HorizontalAlignment="Center"
-                   DataContext="{Binding ErrorMessageViewModel}"
+                   HorizontalAlignment="Center"                 
                    Foreground="DarkRed"
                    Text="{Binding Message}"
                    Visibility="{Binding HasMessage, Converter={StaticResource BooleanToVisibilityConverter}}" />

@@ -32,6 +32,7 @@ public static class AddSingletonServicesHostBuilderExtension
         {
             services.AddSingleton<INavigator, Navigator>();
             services.AddSingleton<IAuthenticator, Authenticator>();
+            services.AddSingleton<AssetStore>();
             services.AddSingleton<ITraderDbContextFactory, TraderDbContextFactory>();
 
             // TODO: Understand

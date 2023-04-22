@@ -9,6 +9,7 @@
 namespace GhisTrader.ViewModels;
 using GhisTrader.Authenticators;
 using GhisTrader.Commands;
+using GhisTrader.Domain.Models;
 using GhisTrader.Extensions;
 using GhisTrader.Navigators;
 using System;
@@ -24,6 +25,9 @@ public class RegisterViewModel : INotifyPropertyChanged
     private readonly IRenavigator? registerRenavigator;
     private readonly IAuthenticator? authenticator;
     private string? email;
+    private string? username;
+    private string? password;
+    private string? errorMessage;
     public RegisterViewModel(IAuthenticator authenticator, IRenavigator registerRenavigator, IRenavigator loginRenavigator)
     {
         //ErrorMessageViewModel = new MessageViewModel();
@@ -34,6 +38,22 @@ public class RegisterViewModel : INotifyPropertyChanged
 
         this.RegisterCommand = new RelayCommand(this.ExecuteRegister, () => this.CanRegister).ObservesProperty(() => this.CanRegister);
         this.ViewLoginCommand = new RelayCommand(this.ExecuteViewLogin).ObservesProperty(() => this.CanRegister);
+
+        this.FillDemoDataAsync();
+    }
+
+    private async Task FillDemoDataAsync()
+    {
+        Random random = new Random();
+        await Task.Delay(1000);
+        if (this.CanRegister)
+        {
+            return;
+        }
+        this.Username = "Ghis" + random.Next(1, 100);
+        this.Password = "1234";
+        this.ConfirmPassword = this.Password;
+        this.Email = $"{this.Username}@FakeEmail.com";
     }
 
     private void ExecuteViewLogin()
@@ -41,18 +61,54 @@ public class RegisterViewModel : INotifyPropertyChanged
         this.loginRenavigator?.Renavigate();
     }
 
-    private void ExecuteRegister()
+    private async void ExecuteRegister()
     {
+        await Task.Run(() => this.DoRegistryAsync());
 
     }
 
-  
+    private async Task DoRegistryAsync()
+    {
+        this.ErrorMessage = string.Empty;
+
+        try
+        {
+            RegistrationResult registrationResult = await this.authenticator.Register(this.Email!, this.Username!, this.Password!,
+                 this.ConfirmPassword!);
+
+            switch (registrationResult)
+            {
+                case RegistrationResult.Success:
+                    this.registerRenavigator?.Renavigate();
+                    break;
+                case RegistrationResult.PasswordsDoNotMatch:
+                    this.ErrorMessage = "Password does not match confirm password.";
+                    break;
+                case RegistrationResult.EmailAlreadyExists:
+                    this.ErrorMessage = "An account for this email already exists.";
+                    break;
+                case RegistrationResult.UsernameAlreadyExists:
+                    this.ErrorMessage = "An account for this username already exists.";
+                    break;
+                default:
+                    this.ErrorMessage = "Registration failed.";
+                    break;
+            }
+        }
+        catch (Exception)
+        {
+            this.ErrorMessage = "Registration failed.";
+        }
+    }
+    public string? ErrorMessage
+    {
+        get => this.errorMessage;
+        set => this.InvokePropertyChanged(this.PropertyChanged, ref this.errorMessage, value);
+
+    }
     public string? Email
     {
-        get
-        {
-            return this.email;
-        }
+        get => this.email;
         set
         {
             if (this.InvokePropertyChanged(this.PropertyChanged, ref this.email, value))
@@ -62,9 +118,8 @@ public class RegisterViewModel : INotifyPropertyChanged
         }
     }
 
-    private string username;
-    private string password;
-    public string Username
+
+    public string? Username
     {
         get
         {
@@ -83,7 +138,7 @@ public class RegisterViewModel : INotifyPropertyChanged
     }
 
 
-    public string Password
+    public string? Password
     {
         get => this.password;
         set
@@ -97,11 +152,11 @@ public class RegisterViewModel : INotifyPropertyChanged
 
     }
 
-    private string confirmPassword;
+    private string? confirmPassword;
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    public string ConfirmPassword
+    public string? ConfirmPassword
     {
         get
         {
