@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31423.177
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GhisTrader", "src\GhisTrader\GhisTrader.csproj", "{FF319A7A-DC37-4A77-B230-4FEB25A45413}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GhisTrader", "src\GhisTrader\GhisTrader.csproj", "{FF319A7A-DC37-4A77-B230-4FEB25A45413}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GhisTrader.Domain", "src\GhisTrader.Domain\GhisTrader.Domain.csproj", "{29BD2F52-A5AF-4813-B4F7-09CD26D34A61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GhisTrader.Domain", "src\GhisTrader.Domain\GhisTrader.Domain.csproj", "{29BD2F52-A5AF-4813-B4F7-09CD26D34A61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GhisTrader.EntityFramework", "src\GhisTrader.EntityFramework\GhisTrader.EntityFramework.csproj", "{04B04682-3EBC-4522-BB70-00C3A8F88C2A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GhisTrader.EntityFramework", "src\GhisTrader.EntityFramework\GhisTrader.EntityFramework.csproj", "{04B04682-3EBC-4522-BB70-00C3A8F88C2A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GhisTrader.FinancialDomainAPI", "src\GhisTrader.FinancialDomainAPI\GhisTrader.FinancialDomainAPI.csproj", "{8D31146B-9785-49D7-B35A-434B9EF75C04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GhisTrader.FinancialDomainAPI", "src\GhisTrader.FinancialDomainAPI\GhisTrader.FinancialDomainAPI.csproj", "{8D31146B-9785-49D7-B35A-434B9EF75C04}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GhisTrader.Domain.Tests", "tests\GhisTrader.Domain.Tests\GhisTrader.Domain.Tests.csproj", "{DEDFA83D-9793-423C-B11C-FDCC81C4F84E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GhisTrader.Domain.Tests", "tests\GhisTrader.Domain.Tests\GhisTrader.Domain.Tests.csproj", "{DEDFA83D-9793-423C-B11C-FDCC81C4F84E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GhisTrader.EntityFramework.Tests", "tests\GhisTrader.EntityFramework.Tests\GhisTrader.EntityFramework.Tests.csproj", "{E29AB84A-6AC7-460A-B22C-B3F40EAF8E97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GhisTrader.EntityFramework.Tests", "tests\GhisTrader.EntityFramework.Tests\GhisTrader.EntityFramework.Tests.csproj", "{E29AB84A-6AC7-460A-B22C-B3F40EAF8E97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GhisTrader.FinancialDomainAPI.Tests", "tests\GhisTrader.Tests\GhisTrader.FinancialDomainAPI.Tests.csproj", "{6EA49868-C475-4984-BEF6-8A6F4003404F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{E29AB84A-6AC7-460A-B22C-B3F40EAF8E97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E29AB84A-6AC7-460A-B22C-B3F40EAF8E97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E29AB84A-6AC7-460A-B22C-B3F40EAF8E97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EA49868-C475-4984-BEF6-8A6F4003404F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EA49868-C475-4984-BEF6-8A6F4003404F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EA49868-C475-4984-BEF6-8A6F4003404F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EA49868-C475-4984-BEF6-8A6F4003404F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

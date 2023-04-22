@@ -8,6 +8,7 @@
 
 namespace GhisTrader.ViewModels;
 
+using GhisTrader.Commands;
 using GhisTrader.Extensions;
 using System;
 using System.Collections.Generic;
@@ -25,10 +26,10 @@ public class LoginViewModel : INotifyPropertyChanged
     private string? useranme;
     public LoginViewModel()
     {
-        this.LoginCommand = new RelayCommand(this.ExecuteLogin, _=> this.CanLogin);
+        this.LoginCommand = new RelayCommand(this.ExecuteLogin, ()=> this.CanLogin);
     }
 
-    private void ExecuteLogin(object obj)
+    private void ExecuteLogin( )
     {
         throw new NotImplementedException();
     }
