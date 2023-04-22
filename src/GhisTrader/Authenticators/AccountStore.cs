@@ -6,24 +6,31 @@
 //  writing by an officer of Ghis. All Rights Reserved.
 // </copyright>
 
-namespace GhisTrader.Domain.Models;
+namespace GhisTrader.Authenticators;
 
+using GhisTrader.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class Account : EntityBase
+public class AccountStore : IAccountStore
 {
+    private Account? currentAccount;
+    public Account? CurrentAccount
+    {
+        get
+        {
+            return this.currentAccount;
+        }
+        set
+        {
+            this.currentAccount = value;
+            this.AccountChanged?.Invoke();
+        }
+    }
 
-    public double Balance { get; set; }
-    public ICollection<AssetTransaction>? AssetTransactions { get; set; }
+    public event Action? AccountChanged;
 
-    // Foreign
-    public int AppUserId { get; set; }
-
-    // public AppUser AccountHolder { get; set; }
-
-    public AppUser AppUser { get; set; }     //AccountHolder nice name
 }

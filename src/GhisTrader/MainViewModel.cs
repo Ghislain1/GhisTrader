@@ -10,6 +10,7 @@ namespace GhisTrader;
 
 using GhisTrader.Authenticators;
 using GhisTrader.Extensions;
+using GhisTrader.Factory;
 using GhisTrader.Navigators;
 using GhisTrader.ViewModels;
 using System;
@@ -26,11 +27,18 @@ public class MainViewModel : INotifyPropertyChanged
     private bool isLoggedIn;
     private readonly INavigator navigator;
     private readonly IAuthenticator authenticator;
-    public MainViewModel(INavigator navigator, IAuthenticator authenticator)
+    private readonly ITraderViewModelFactory traderViewModelFactory;
+    public MainViewModel(ITraderViewModelFactory traderViewModelFactory, INavigator navigator, IAuthenticator authenticator)
     {
+        this.traderViewModelFactory = traderViewModelFactory;
         this.navigator = navigator;
         this.authenticator = authenticator;
-        // this.CurrentViewModel = new LoginViewModel();
+        this.navigator.StateChanged += () => {
+
+        
+        };
+        this.authenticator.StateChanged += () => { };
+        this.CurrentViewModel = this.traderViewModelFactory.CreateViewModel(ViewType.Login);
 
     }
 

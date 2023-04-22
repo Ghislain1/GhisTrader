@@ -9,6 +9,7 @@
 namespace GhisTrader.Extensions;
 
 using GhisTrader.Authenticators;
+using GhisTrader.Factory;
 using GhisTrader.Navigators;
 using GhisTrader.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,7 +29,19 @@ public static class AddViewModelsHostBuilderExtension
             Console.WriteLine("------------ Main Registr");
             services.AddTransient<MainViewModel>();
 
+            // Factory
+            services.AddSingleton<ITraderViewModelFactory, TraderViewModelFactory>();
+
+            services.AddSingleton<CreateViewModel<HomeViewModel>>(services => () => services.GetRequiredService<HomeViewModel>());
+            services.AddTransient<PortfolioViewModel>();
+            services.AddTransient<BuyViewModel>();
+
+
             // Add VM i.e.LoginViewModel
+            services.AddSingleton<CreateViewModel<HomeViewModel>>(services => () => services.GetRequiredService<HomeViewModel>());
+            services.AddSingleton<CreateViewModel<PortfolioViewModel>>(services => () => services.GetRequiredService<PortfolioViewModel>());
+            services.AddSingleton<CreateViewModel<BuyViewModel>>(services => () => services.GetRequiredService<BuyViewModel>());
+            services.AddSingleton<CreateViewModel<SellViewModel>>(services => () => services.GetRequiredService<SellViewModel>());
             services.AddSingleton<CreateViewModel<LoginViewModel>>(services => () => CreateLoginViewModel(services));
             services.AddSingleton<CreateViewModel<RegisterViewModel>>(services => () => CreateRegisterViewModel(services));
 

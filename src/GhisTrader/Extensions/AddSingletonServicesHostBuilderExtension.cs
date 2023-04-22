@@ -9,7 +9,13 @@
 namespace GhisTrader.Extensions;
 
 using GhisTrader.Authenticators;
+using GhisTrader.Domain;
+using GhisTrader.Domain.Models;
+using GhisTrader.EntityFramework.Factory;
+using GhisTrader.EntityFramework.Services;
 using GhisTrader.Navigators;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -26,6 +32,21 @@ public static class AddSingletonServicesHostBuilderExtension
         {
             services.AddSingleton<INavigator, Navigator>();
             services.AddSingleton<IAuthenticator, Authenticator>();
+            services.AddSingleton<ITraderDbContextFactory, TraderDbContextFactory>();
+
+            // TODO: Understand
+            services.AddSingleton<IAccountStore, AccountStore>();    
+
+            services.AddSingleton<IPasswordHasher<AppUser>, PasswordHasher<AppUser>>();
+
+            services.AddSingleton<IAuthenticationService, AuthenticationService>();
+            services.AddSingleton<IDataService<Account>, AccountDataService>();
+            services.AddSingleton<IAccountService, AccountDataService>();
+            services.AddSingleton<IStockPriceService, StockPriceService>();
+            //services.AddSingleton<IBuyStockService, BuyStockService>();
+            //services.AddSingleton<ISellStockService, SellStockService>();
+            services.AddSingleton<IMajorIndexService, MajorIndexService>();
+
 
 
         });
