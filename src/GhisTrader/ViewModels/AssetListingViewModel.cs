@@ -15,14 +15,14 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 
-public class AssetListingViewModel: INotifyPropertyChanged
+public class AssetListingViewModel : INotifyPropertyChanged
 {
-    private readonly AssetStore  assetStore;
-    private readonly Func<IEnumerable<AssetViewModel>, IEnumerable<AssetViewModel>>  filterAssets;
+    private readonly AssetStore assetStore;
+    private readonly Func<IEnumerable<AssetViewModel>, IEnumerable<AssetViewModel>> filterAssets;
     private readonly ObservableCollection<AssetViewModel> assets;
     public event PropertyChangedEventHandler? PropertyChanged;
     public IEnumerable<AssetViewModel> Assets => this.assets;
- 
+
     public AssetListingViewModel(AssetStore assetStore) : this(assetStore, assets => assets) { }
 
     public AssetListingViewModel(AssetStore assetStore, Func<IEnumerable<AssetViewModel>, IEnumerable<AssetViewModel>> filterAssets)
@@ -33,7 +33,7 @@ public class AssetListingViewModel: INotifyPropertyChanged
 
         this.assetStore.StateChanged += AssetStore_StateChanged;
 
-       this. ResetAssets();
+        this.ResetAssets();
     }
 
     private void ResetAssets()
@@ -58,7 +58,7 @@ public class AssetListingViewModel: INotifyPropertyChanged
     {
         foreach (AssetViewModel asset in this.assets)
         {
-           // asset.Dispose();
+            // asset.Dispose();
         }
     }
 

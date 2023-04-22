@@ -7,32 +7,31 @@
 // </copyright>
 
 namespace GhisTrader.Authenticators;
-    using GhisTrader.Domain.Models;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+using GhisTrader.Domain.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-    public class AssetStore
+public class AssetStore
+{
+    private readonly IAccountStore accountStore;
+
+    public double AccountBalance => this.accountStore.CurrentAccount?.Balance ?? 0;
+    public IEnumerable<AssetTransaction> AssetTransactions => this.accountStore.CurrentAccount?.AssetTransactions ?? new List<AssetTransaction>();
+
+    public event Action StateChanged;
+
+    public AssetStore(IAccountStore accountStore)
     {
-        private readonly IAccountStore  accountStore;
+        this.accountStore = accountStore;
 
-        public double AccountBalance => this.accountStore.CurrentAccount?.Balance ?? 0;
-        public IEnumerable<AssetTransaction> AssetTransactions => this.accountStore.CurrentAccount?.AssetTransactions ?? new List<AssetTransaction>();
-
-        public event Action StateChanged;
-
-        public AssetStore(IAccountStore accountStore)
-        {
-            this.accountStore = accountStore;
-
-            this.accountStore.AccountChanged += OnStateChanged;
-        }
-
-        private void OnStateChanged()
-        {
-            StateChanged?.Invoke();
-        }
+        this.accountStore.AccountChanged += OnStateChanged;
     }
- 
+
+    private void OnStateChanged()
+    {
+        StateChanged?.Invoke();
+    }
+}

@@ -12,6 +12,7 @@ namespace GhisTrader.ViewModels
     using GhisTrader.Extensions;
     using System;
     using System.ComponentModel;
+    using System.Linq;
 
     public class AssetSummaryViewModel : INotifyPropertyChanged, IDisposable
     {
@@ -31,11 +32,11 @@ namespace GhisTrader.ViewModels
 
         private void AssetStore_StateChanged()
         {
-            
+
             this.InvokePropertyChanged(this.PropertyChanged, nameof(this.AccountBalance));
         }
 
-        public   void Dispose()
+        public void Dispose()
         {
             //this.assetStore.StateChanged -= AssetStorethis.StateChanged;
             //AssetListingViewModel.Dispose();

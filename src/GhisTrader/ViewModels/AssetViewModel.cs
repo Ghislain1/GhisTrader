@@ -13,11 +13,11 @@ public class AssetViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
     public string Symbol { get; }
-        public int Shares { get; }
+    public int Shares { get; }
 
-        public AssetViewModel(string symbol, int shares)
-        {
-            Symbol = symbol;
-            Shares = shares;
-        }
+    public AssetViewModel(string symbol, int shares)
+    {
+        Symbol = symbol;
+        Shares = shares;
     }
+}

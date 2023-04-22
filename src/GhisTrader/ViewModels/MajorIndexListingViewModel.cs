@@ -25,7 +25,7 @@ public class MajorIndexListingViewModel : INotifyPropertyChanged
             return this.dowJones;
         }
         set => this.InvokePropertyChanged(this.PropertyChanged, ref this.dowJones, value);
-        
+
     }
 
     private MajorIndex nasdaq;
@@ -62,7 +62,7 @@ public class MajorIndexListingViewModel : INotifyPropertyChanged
 
     public MajorIndexListingViewModel(IMajorIndexService majorIndexService)
     {
-       // LoadMajorIndexesCommand = new LoadMajorIndexesCommand(this, majorIndexService);
+        // LoadMajorIndexesCommand = new LoadMajorIndexesCommand(this, majorIndexService);
     }
 
     public static MajorIndexListingViewModel LoadMajorIndexViewModel(IMajorIndexService majorIndexService)
