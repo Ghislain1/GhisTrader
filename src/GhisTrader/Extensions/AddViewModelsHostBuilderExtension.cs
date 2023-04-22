@@ -9,6 +9,7 @@
 namespace GhisTrader.Extensions;
 
 using GhisTrader.Authenticators;
+using GhisTrader.Domain;
 using GhisTrader.Factory;
 using GhisTrader.Navigators;
 using GhisTrader.ViewModels;
@@ -32,14 +33,14 @@ public static class AddViewModelsHostBuilderExtension
             // Factory
             services.AddSingleton<ITraderViewModelFactory, TraderViewModelFactory>();
 
-            services.AddSingleton<CreateViewModel<HomeViewModel>>(services => () => services.GetRequiredService<HomeViewModel>());
             services.AddTransient<PortfolioViewModel>();
             services.AddTransient<BuyViewModel>();
+            services.AddTransient<AssetSummaryViewModel>();
             services.AddTransient<HomeViewModel>();
 
 
             // Add VM i.e.LoginViewModel
-            services.AddSingleton<CreateViewModel<HomeViewModel>>(services => () => services.GetRequiredService<HomeViewModel>());
+            services.AddSingleton<CreateViewModel<HomeViewModel>>(services => () => CreateHomeViewModel(services));
             services.AddSingleton<CreateViewModel<PortfolioViewModel>>(services => () => services.GetRequiredService<PortfolioViewModel>());
             services.AddSingleton<CreateViewModel<BuyViewModel>>(services => () => services.GetRequiredService<BuyViewModel>());
             services.AddSingleton<CreateViewModel<SellViewModel>>(services => () => services.GetRequiredService<SellViewModel>());
@@ -54,6 +55,14 @@ public static class AddViewModelsHostBuilderExtension
         });
         return hostBuilder;
     }
+
+    private static HomeViewModel CreateHomeViewModel(IServiceProvider services)
+    {
+        return new HomeViewModel(
+            services.GetRequiredService<AssetSummaryViewModel>(),
+            MajorIndexListingViewModel.LoadMajorIndexViewModel(services.GetRequiredService<IMajorIndexService>()));
+    }
+
     private static LoginViewModel CreateLoginViewModel(IServiceProvider services)
     {
         return new LoginViewModel(

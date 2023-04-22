@@ -13,10 +13,15 @@ using GhisTrader.Domain;
 using System.Windows.Input;
 using System.ComponentModel;
 using GhisTrader.Extensions;
+using GhisTrader.Commands;
+using System;
+using GhisTrader.EntityFramework.Services;
+using System.Threading.Tasks;
 
 public class MajorIndexListingViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
+    private readonly IMajorIndexService? majorIndexService;
     private MajorIndex dowJones;
     public MajorIndex DowJones
     {
@@ -62,7 +67,17 @@ public class MajorIndexListingViewModel : INotifyPropertyChanged
 
     public MajorIndexListingViewModel(IMajorIndexService majorIndexService)
     {
-        // LoadMajorIndexesCommand = new LoadMajorIndexesCommand(this, majorIndexService);
+        this.majorIndexService = majorIndexService;
+        this.LoadMajorIndexesCommand = new RelayCommand(this.ExecuteLoadMajorIndexes, () => true);
+    }
+
+    private async void ExecuteLoadMajorIndexes()
+    {
+        this.IsLoading = true;
+
+        await Task.WhenAll(LoadDowJones(), LoadNasdaq(), LoadSP500());
+
+        this.IsLoading = false;
     }
 
     public static MajorIndexListingViewModel LoadMajorIndexViewModel(IMajorIndexService majorIndexService)
@@ -72,5 +87,22 @@ public class MajorIndexListingViewModel : INotifyPropertyChanged
         majorIndexViewModel.LoadMajorIndexesCommand.Execute(null);
 
         return majorIndexViewModel;
+    }
+
+
+
+    private async Task LoadDowJones()
+    {
+        this.DowJones = await this.majorIndexService!.GetMajorIndex(MajorIndexType.DowJones);
+    }
+
+    private async Task LoadNasdaq()
+    {
+        this.Nasdaq = await this.majorIndexService!.GetMajorIndex(MajorIndexType.Nasdaq);
+    }
+
+    private async Task LoadSP500()
+    {
+        this.SP500 = await this.majorIndexService!.GetMajorIndex(MajorIndexType.SP500);
     }
 }

@@ -38,6 +38,7 @@ public partial class App : Application
         return Host.CreateDefaultBuilder(args)
              .AddSingletonServices()
                .AddViewModels()
+               .AddFinanceAPI()
                .AddViews();
     }
     protected override async void OnStartup(StartupEventArgs startupEventArgs)

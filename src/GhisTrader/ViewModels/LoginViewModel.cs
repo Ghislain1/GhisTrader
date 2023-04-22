@@ -63,9 +63,17 @@ public class LoginViewModel : INotifyPropertyChanged
     public string? ErrorMessage
     {
         get => this.errorMessage;
-        set => this.InvokePropertyChanged(this.PropertyChanged, ref this.errorMessage, value);
+        set
+        {
+            if (this.InvokePropertyChanged(this.PropertyChanged, ref this.errorMessage, value))
+            {
+                this.InvokePropertyChanged(this.PropertyChanged, nameof(this.HasErrorMessage));
+            }
+        }
+
 
     }
+    public bool HasErrorMessage => !string.IsNullOrWhiteSpace(this.ErrorMessage);
     public bool CanLogin => !string.IsNullOrWhiteSpace(this.Username) && !string.IsNullOrWhiteSpace(this.Password);
 
     private async void ExecuteLogin()
