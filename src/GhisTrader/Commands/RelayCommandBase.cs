@@ -25,7 +25,7 @@ public abstract class RelayCommandBase : ICommand
     private readonly HashSet<string> observedPropertiesExpressions = new HashSet<string>();
 
     /// <summary>
-    /// Creates a new instance of a <see cref="DelegateCommandBase"/>, specifying both the execute action and the can execute function.
+    /// Creates a new instance of a <see cref="RelayCommandBase"/>, specifying both the execute action and the can execute function.
     /// </summary>
     protected RelayCommandBase()
     {
@@ -57,8 +57,7 @@ public abstract class RelayCommandBase : ICommand
     /// Raises <see cref="CanExecuteChanged"/> so every command invoker
     /// can requery to check if the command can execute.
     /// </summary>
-    /// <remarks>Note that this will trigger the execution of <see cref="CanExecuteChanged"/> once for each invoker.</remarks>
-    [SuppressMessage("Microsoft.Design", "CA1030:UseEventsWhereAppropriate")]
+    /// <remarks>Note that this will trigger the execution of <see cref="CanExecuteChanged"/> once for each invoker.</remarks>   
     public void RaiseCanExecuteChanged()
     {
         OnCanExecuteChanged();

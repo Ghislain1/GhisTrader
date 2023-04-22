@@ -13,6 +13,7 @@ namespace GhisTrader.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
@@ -89,6 +90,30 @@ public class RelayCommand : RelayCommandBase
     protected override bool CanExecute(object parameter)
     {
         return CanExecute();
+    }
+
+    /// <summary>
+    /// Observes a property that implements INotifyPropertyChanged, and automatically calls DelegateCommandBase.RaiseCanExecuteChanged on property changed notifications.
+    /// </summary>
+    /// <typeparam name="T">The object type containing the property specified in the expression.</typeparam>
+    /// <param name="propertyExpression">The property expression. Example: ObservesProperty(() => PropertyName).</param>
+    /// <returns>The current instance of DelegateCommand</returns>
+    public RelayCommand ObservesProperty<T>(Expression<Func<T>> propertyExpression)
+    {
+        this.ObservesPropertyInternal(propertyExpression);
+        return this;
+    }
+
+    /// <summary>
+    /// Observes a property that is used to determine if this command can execute, and if it implements INotifyPropertyChanged it will automatically call DelegateCommandBase.RaiseCanExecuteChanged on property changed notifications.
+    /// </summary>
+    /// <param name="canExecuteExpression">The property expression. Example: ObservesCanExecute(() => PropertyName).</param>
+    /// <returns>The current instance of DelegateCommand</returns>
+    public RelayCommand ObservesCanExecute(Expression<Func<bool>> canExecuteExpression)
+    {
+       this.canExecuteMethod = canExecuteExpression.Compile();
+        ObservesPropertyInternal(canExecuteExpression);
+        return this;
     }
 
 

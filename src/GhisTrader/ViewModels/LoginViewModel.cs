@@ -23,23 +23,23 @@ public class LoginViewModel : INotifyPropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
 
     private  string ?password;
-    private string? useranme;
+    private string? userName;
     public LoginViewModel()
     {
-        this.LoginCommand = new RelayCommand(this.ExecuteLogin, ()=> this.CanLogin);
+        this.LoginCommand = new RelayCommand(this.ExecuteLogin, () => this.CanLogin).ObservesProperty(() => this.CanLogin);
     }
 
     private void ExecuteLogin( )
     {
-        throw new NotImplementedException();
+         
     }
 
-    public string? Useranme
+    public string? UserName
     {
-        get => this.useranme;
-        set => this.InvokePropertyChanged(this.PropertyChanged, ref this.useranme, value);
+        get => this.userName;
+        set => this.InvokePropertyChanged(this.PropertyChanged, ref this.userName, value);
     }
-    public ICommand LoginCommand { get; }
+    public RelayCommand LoginCommand { get; }
     public string? Password
     {
         get => this.password;
@@ -47,9 +47,9 @@ public class LoginViewModel : INotifyPropertyChanged
         {
             if(this.InvokePropertyChanged(this.PropertyChanged, ref this.password, value))
             {
-                this.InvokePropertyChanged(this.PropertyChanged, nameof(this.CanLogin));
+                
             }
         }
     }
-    public bool CanLogin => !string.IsNullOrWhiteSpace(this.Useranme) && !string.IsNullOrWhiteSpace(this.Password);
+    public bool CanLogin => !string.IsNullOrWhiteSpace(this.UserName) && !string.IsNullOrWhiteSpace(this.Password);
 }
