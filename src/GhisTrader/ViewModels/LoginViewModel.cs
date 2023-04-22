@@ -8,8 +8,10 @@
 
 namespace GhisTrader.ViewModels;
 
+using GhisTrader.Authenticators;
 using GhisTrader.Commands;
 using GhisTrader.Extensions;
+using GhisTrader.Navigators;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,35 +23,50 @@ using System.Windows.Input;
 public class LoginViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
-
-    private  string ?password;
+    private readonly IRenavigator? loginRenavigator;
+    private readonly IRenavigator? renavigator;
+    private readonly IRenavigator? registerRenavigator;
+    private readonly IAuthenticator? authenticator;
+    private string? password;
     private string? userName;
-    public LoginViewModel()
+    public LoginViewModel(IAuthenticator authenticator, IRenavigator loginRenavigator, IRenavigator registerRenavigator)
     {
+        this.authenticator = authenticator;
+        this.loginRenavigator = loginRenavigator;
+        this.registerRenavigator = registerRenavigator;
         this.LoginCommand = new RelayCommand(this.ExecuteLogin, () => this.CanLogin).ObservesProperty(() => this.CanLogin);
+        this.ViewRegisterCommand = new RelayCommand(this.ExecuteViewRegister).ObservesProperty(() => this.CanLogin);
     }
 
-    private void ExecuteLogin( )
-    {
-         
-    }
+
+    public ICommand LoginCommand { get; }
+    public ICommand ViewRegisterCommand { get; }
 
     public string? UserName
     {
         get => this.userName;
         set => this.InvokePropertyChanged(this.PropertyChanged, ref this.userName, value);
     }
-    public ICommand LoginCommand { get; }
     public string? Password
     {
         get => this.password;
         set
         {
-            if(this.InvokePropertyChanged(this.PropertyChanged, ref this.password, value))
+            if (this.InvokePropertyChanged(this.PropertyChanged, ref this.password, value))
             {
                 this.InvokePropertyChanged(this.PropertyChanged, nameof(this.CanLogin));
             }
         }
     }
     public bool CanLogin => !string.IsNullOrWhiteSpace(this.UserName) && !string.IsNullOrWhiteSpace(this.Password);
+
+    private void ExecuteLogin()
+    {
+
+    }
+
+    private void ExecuteViewRegister()
+    {
+        this.renavigator?.Renavigate();
+    }
 }

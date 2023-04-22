@@ -18,10 +18,10 @@ using System;
 /// <summary>
 /// An <see cref="ICommand"/> whose delegates can be attached for <see cref="Execute"/> and <see cref="CanExecute"/>.
 /// </summary>
-public abstract class RelayCommandBase : ICommand 
+public abstract class RelayCommandBase : ICommand
 {
 
-    private SynchronizationContext  synchronizationContext;
+    private SynchronizationContext synchronizationContext;
     private readonly HashSet<string> observedPropertiesExpressions = new HashSet<string>();
 
     /// <summary>
@@ -29,7 +29,7 @@ public abstract class RelayCommandBase : ICommand
     /// </summary>
     protected RelayCommandBase()
     {
-         this.synchronizationContext = SynchronizationContext.Current;
+        this.synchronizationContext = SynchronizationContext.Current;
     }
 
     /// <summary>
@@ -105,9 +105,9 @@ public abstract class RelayCommandBase : ICommand
         }
     }
 
- 
 
-    
 
- 
+
+
+
 }

@@ -24,14 +24,14 @@ public class MainViewModel : INotifyPropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
     private INotifyPropertyChanged? currentViewModel;
     private bool isLoggedIn;
-    private  readonly INavigator navigator;
+    private readonly INavigator navigator;
     private readonly IAuthenticator authenticator;
     public MainViewModel(INavigator navigator, IAuthenticator authenticator)
     {
-        this.navigator =navigator;
+        this.navigator = navigator;
         this.authenticator = authenticator;
-        this.CurrentViewModel = new LoginViewModel();
-        
+        // this.CurrentViewModel = new LoginViewModel();
+
     }
 
     private async void LoadAsync()
@@ -56,6 +56,5 @@ public class MainViewModel : INotifyPropertyChanged
         set => this.InvokePropertyChanged(this.PropertyChanged, ref this.currentViewModel, value);
     }
 
-   
-}
 
+}

@@ -6,7 +6,7 @@
 //  writing by an officer of Ghis. All Rights Reserved.
 // </copyright>
 
- 
+
 
 namespace GhisTrader.Commands;
 
@@ -111,11 +111,10 @@ public class RelayCommand : RelayCommandBase
     /// <returns>The current instance of DelegateCommand</returns>
     public RelayCommand ObservesCanExecute(Expression<Func<bool>> canExecuteExpression)
     {
-       this.canExecuteMethod = canExecuteExpression.Compile();
+        this.canExecuteMethod = canExecuteExpression.Compile();
         ObservesPropertyInternal(canExecuteExpression);
         return this;
     }
 
 
 }
-

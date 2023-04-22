@@ -21,10 +21,10 @@ public class Renavigator<TViewModel> : IRenavigator where TViewModel : INotifyPr
     private readonly INavigator navigator;
     // TODO@Ze can replace with action ?
     private readonly CreateViewModel<TViewModel> createViewModel;
-    public Renavigator(INavigator navigator,CreateViewModel<TViewModel> createViewModel)
+    public Renavigator(INavigator navigator, CreateViewModel<TViewModel> createViewModel)
     {
-        this.navigator= navigator;
-        this.createViewModel= createViewModel;
+        this.navigator = navigator;
+        this.createViewModel = createViewModel;
     }
     public void Renavigate()
     {

@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 public class Navigator : INavigator
 {
 
-    private INotifyPropertyChanged ?currentViewModel;
+    private INotifyPropertyChanged? currentViewModel;
 
     public INotifyPropertyChanged CurrentViewModel
     {

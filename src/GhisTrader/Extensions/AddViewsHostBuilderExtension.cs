@@ -28,4 +28,3 @@ public static class AddViewsHostBuilderExtension
         return hostBuilder;
     }
 }
-

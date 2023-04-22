@@ -6,15 +6,14 @@
 //  writing by an officer of Ghis. All Rights Reserved.
 // </copyright>
 
-namespace GhisTrader.Domain.Models
+namespace GhisTrader.Domain.Models;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+public abstract class EntityBase
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    public abstract class EntityBase
-    {
-        public int Id { get; set; }
-    }
+    public int Id { get; set; }
 }

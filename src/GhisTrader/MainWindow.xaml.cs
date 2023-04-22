@@ -33,4 +33,3 @@ public partial class MainWindow : Window
         this.Loaded += (_, _) => this.DataContext = mainViewModel;
     }
 }
-
