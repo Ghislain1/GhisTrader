@@ -63,11 +63,13 @@ namespace GhisTrader.EntityFramework.DbContexts
 
             base.OnModelCreating(builder);
         }
-        private EntityTypeBuilder<TEntity> Create<TEntity>(ModelBuilder modelBuilder) where TEntity : EntityBase
+        private EntityTypeBuilder<T> Create<T>(ModelBuilder modelBuilder) where T : EntityBase
         {
-            var entity = modelBuilder.Entity<TEntity>();
+            var entity = modelBuilder.Entity<T>();
             entity.HasKey(x => x.Id);
-            //entity.ToTable($"{nameof(TEntity)}s");
+            // var tableName2 = $"{nameof(T)}s";
+            var tableName = typeof(T).Name +"s";
+            entity.ToTable(tableName);
             return entity;
 
         }

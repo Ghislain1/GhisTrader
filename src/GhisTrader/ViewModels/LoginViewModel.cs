@@ -39,7 +39,7 @@ public class LoginViewModel : INotifyPropertyChanged
         get => this.userName;
         set => this.InvokePropertyChanged(this.PropertyChanged, ref this.userName, value);
     }
-    public RelayCommand LoginCommand { get; }
+    public ICommand LoginCommand { get; }
     public string? Password
     {
         get => this.password;
@@ -47,7 +47,7 @@ public class LoginViewModel : INotifyPropertyChanged
         {
             if(this.InvokePropertyChanged(this.PropertyChanged, ref this.password, value))
             {
-                
+                this.InvokePropertyChanged(this.PropertyChanged, nameof(this.CanLogin));
             }
         }
     }
