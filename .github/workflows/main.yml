@@ -42,11 +42,12 @@ jobs:
         run: |
           dir      
           dotnet test --logger trx --results-directory "TestResults-${{ matrix.dotnet-version }}"
+     
       # Packaging workflow data as artifacts (to save log files, core dumps, test results, or screenshots)
       - name: Upload dotnet test results(Packaging workflow data as artifacts)
         uses: actions/upload-artifact@v3
         with:
-            name: dotnet-results-${{ matrix.dotnet-version }}
+            name: GhisTrader-TestResults-${{ matrix.dotnet-version }}
             path: TestResults-${{ matrix.dotnet-version }}
 
       - name: Generate changelog
@@ -60,5 +61,27 @@ jobs:
           echo  "github.ref ====> ${{github.ref}}"
           echo  "event_name ====> ${{github.event_name}}"
           more  ${{github.workspace}}-CHANGELOG.txt
-
+  deploy:
+    needs: release
+    runs-on:  windows-latest
+    strategy:
+      matrix:
+        dotnet-version: [ '6.0.x' ]
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: ${{ matrix.dotnet-version }}
+          source-url: https://nuget.pkg.github.com/<owner>/index.json
+        env:
+          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Publish (Release Mode)
+        run: |
+          dir
+          cd ./src/GhisTrader
+          dotnet publish -v d  -o ${{ github.workspace }}/bin/Publish --configuration Release -r win-x64 --self-contained true /p:PublishSingleFile=true /p:PublishReadyToRun=true
+      
       
