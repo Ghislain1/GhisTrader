@@ -21,7 +21,7 @@ namespace GhisTrader.EntityFramework.DbContexts
     // TODO@GZe: later public  class AppUserDbContext : IdentityDbContext<AppUser>
     public class AppUserDbContext : DbContext
     {
-        public AppUserDbContext(DbContextOptions<AppUserDbContext> options) : base(options) { }
+       // public AppUserDbContext(DbContextOptions<AppUserDbContext> options) : base(options) { }
 
         //  Second way to create Your context( best way for WPF)
         public AppUserDbContext() : base() { }
