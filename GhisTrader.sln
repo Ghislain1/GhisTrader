@@ -9,13 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GhisTrader.Domain", "src\Gh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GhisTrader.EntityFramework", "src\GhisTrader.EntityFramework\GhisTrader.EntityFramework.csproj", "{04B04682-3EBC-4522-BB70-00C3A8F88C2A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GhisTrader.FinancialDomainAPI", "src\GhisTrader.FinancialDomainAPI\GhisTrader.FinancialDomainAPI.csproj", "{8D31146B-9785-49D7-B35A-434B9EF75C04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GhisTrader.FinancialModelingPrepAPI", "src\GhisTrader.FinancialDomainAPI\GhisTrader.FinancialModelingPrepAPI.csproj", "{8D31146B-9785-49D7-B35A-434B9EF75C04}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GhisTrader.Domain.Tests", "tests\GhisTrader.Domain.Tests\GhisTrader.Domain.Tests.csproj", "{DEDFA83D-9793-423C-B11C-FDCC81C4F84E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GhisTrader.EntityFramework.Tests", "tests\GhisTrader.EntityFramework.Tests\GhisTrader.EntityFramework.Tests.csproj", "{E29AB84A-6AC7-460A-B22C-B3F40EAF8E97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GhisTrader.FinancialDomainAPI.Tests", "tests\GhisTrader.Tests\GhisTrader.FinancialDomainAPI.Tests.csproj", "{6EA49868-C475-4984-BEF6-8A6F4003404F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GhisTrader.FinancialModelingPrepAPI.Tests", "tests\GhisTrader.Tests\GhisTrader.FinancialModelingPrepAPI.Tests.csproj", "{6EA49868-C475-4984-BEF6-8A6F4003404F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

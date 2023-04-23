@@ -10,7 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\GhisTrader.Domain\GhisTrader.Domain.csproj" />
     <ProjectReference Include="..\GhisTrader.EntityFramework\GhisTrader.EntityFramework.csproj" />
-    <ProjectReference Include="..\GhisTrader.FinancialDomainAPI\GhisTrader.FinancialDomainAPI.csproj" />
+    <ProjectReference Include="..\GhisTrader.FinancialDomainAPI\GhisTrader.FinancialModelingPrepAPI.csproj" />
   </ItemGroup>
 
   <ItemGroup>

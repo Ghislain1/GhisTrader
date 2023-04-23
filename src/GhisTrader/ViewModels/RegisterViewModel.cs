@@ -28,9 +28,9 @@ public class RegisterViewModel : INotifyPropertyChanged
     private string? username;
     private string? password;
     private string? errorMessage;
+    private string? confirmPassword;
     public RegisterViewModel(IAuthenticator authenticator, IRenavigator registerRenavigator, IRenavigator loginRenavigator)
-    {
-        //ErrorMessageViewModel = new MessageViewModel();
+    {     
 
         this.authenticator = authenticator;
         this.registerRenavigator = registerRenavigator;
@@ -73,7 +73,7 @@ public class RegisterViewModel : INotifyPropertyChanged
 
         try
         {
-            RegistrationResult registrationResult = await this.authenticator.Register(this.Email!, this.Username!, this.Password!,
+            RegistrationResult registrationResult = await this.authenticator!.Register(this.Email!, this.Username!, this.Password!,
                  this.ConfirmPassword!);
 
             switch (registrationResult)
@@ -95,9 +95,9 @@ public class RegisterViewModel : INotifyPropertyChanged
                     break;
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            this.ErrorMessage = "Registration failed.";
+            this.ErrorMessage = "Registration failed." + ex.Message;
         }
     }
     public string? ErrorMessage
@@ -118,14 +118,9 @@ public class RegisterViewModel : INotifyPropertyChanged
         }
     }
 
-
     public string? Username
     {
-        get
-        {
-            return this.username;
-        }
-
+        get=>       this.username;
         set
         {
             if (this.InvokePropertyChanged(this.PropertyChanged, ref this.username, value))
@@ -136,8 +131,6 @@ public class RegisterViewModel : INotifyPropertyChanged
 
 
     }
-
-
     public string? Password
     {
         get => this.password;
@@ -152,7 +145,7 @@ public class RegisterViewModel : INotifyPropertyChanged
 
     }
 
-    private string? confirmPassword;
+  
 
     public event PropertyChangedEventHandler? PropertyChanged;
 

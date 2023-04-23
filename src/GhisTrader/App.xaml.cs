@@ -9,6 +9,7 @@
 namespace GhisTrader;
 
 using GhisTrader.EntityFramework.DbContexts;
+using GhisTrader.EntityFramework.Factory;
 using GhisTrader.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,10 +28,11 @@ using System.Windows;
 public partial class App : Application
 {
     private readonly IHost? host;
-    private readonly AppUserDbContext appUserDbContext = new AppUserDbContext();
+    private readonly ITraderDbContextFactory ?traderDbContextFactory  ;
     public App()
     {
         this.host = CreateHostBuider().Build();
+        this.traderDbContextFactory = this.host?.Services.GetRequiredService<ITraderDbContextFactory>();
     }
 
     public static IHostBuilder CreateHostBuider(string[]? args = null)
@@ -46,10 +48,13 @@ public partial class App : Application
         await this.host?.StartAsync()!;
 
         // DB Migration
-        await this.appUserDbContext.Database.EnsureCreatedAsync();
+        using (var appUserDbContext = this.traderDbContextFactory!.CreateAppUserDbContext())
+        {
+            await  appUserDbContext.Database.EnsureCreatedAsync();
 
-        // load the entities into EF Core
-        this.appUserDbContext.AppUsers.Load();
+            // Load the entities into EF Core
+             appUserDbContext.AppUsers.Load();
+        }
 
 
         // Show Window
