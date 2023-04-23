@@ -41,8 +41,14 @@ jobs:
       - name: Testing Ur Code(with the dotnet CLI on GhisTrader.sln)
         run: |
           dir      
-          dotnet test
- 
+          dotnet test --logger trx --results-directory "TestResults-${{ matrix.dotnet-version }}"
+      # Packaging workflow data as artifacts (to save log files, core dumps, test results, or screenshots)
+      - name: Upload dotnet test results(Packaging workflow data as artifacts)
+        uses: actions/upload-artifact@v3
+        with:
+            name: dotnet-results-${{ matrix.dotnet-version }}
+            path: TestResults-${{ matrix.dotnet-version }}
+
       - name: Generate changelog
         run: echo "#Good things are comming" > ${{github.workspace}}-CHANGELOG.txt
 
