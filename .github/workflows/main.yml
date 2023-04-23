@@ -9,7 +9,7 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        dotnet-version: [ '6.0.x', '7.0.x' ]
+        dotnet-version: [ '6.0.x' ]
     env:
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
       DOTNET_NOLOGO: true
@@ -22,11 +22,13 @@ jobs:
       - name: Install .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 6.0.x
+          dotnet-version: ${{ matrix.dotnet-version }}
 
       # You can test your matrix by printing the current dotnet version
-      - name: Display dotnet version
-        run: dotnet --version
+      - name: Display .NET Version((with the dotnet CLI))
+        run: |
+          dir 
+          dotnet --version
 
         # Building  your code
       - name: Building Ur Code
@@ -41,7 +43,6 @@ jobs:
           dir
           cd ..
           dotnet test
-
  
       - name: Generate changelog
         run: echo "#Good things are comming" > ${{github.workspace}}-CHANGELOG.txt
