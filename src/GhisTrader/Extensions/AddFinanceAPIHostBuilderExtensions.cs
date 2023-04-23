@@ -9,6 +9,7 @@
 namespace GhisTrader.Extensions;
 
 using GhisTrader.EntityFramework;
+using GhisTrader.FinancialModelingPrepAPI;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,10 +26,13 @@ public static class AddFinanceAPIHostBuilderExtensions
     {
         host.ConfigureServices((context, services) =>
         {
-            string apiKey = context.Configuration.GetValue<string>("FINANCE_API_KEY");
-            services.AddSingleton(new FinancialDoaminAPIKey(apiKey));
+            // "https://financialmodelingprep.com/api/v3/income-statement/AAPL?apikey=0afb2ef442b712afa5c85b022d5a1f6e"))
+            var defaultApiKey = "0afb2ef442b712afa5c85b022d5a1f6e";
+            string apiKey = context.Configuration.GetValue<string>("FINANCE_API_KEY")?? defaultApiKey;
 
-            services.AddHttpClient<FinancialDomainHttpClient>(c =>
+            services.AddSingleton(new FinancialModelingPrepAPIKey(apiKey));
+
+            services.AddHttpClient<FinancialModelingPrepHttpClient>(c =>
             {
                 c.BaseAddress = new Uri("https://financialmodelingprep.com/api/v3/");
             });

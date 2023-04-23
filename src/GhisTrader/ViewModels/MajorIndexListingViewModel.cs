@@ -17,11 +17,12 @@ using GhisTrader.Commands;
 using System;
 using GhisTrader.EntityFramework.Services;
 using System.Threading.Tasks;
+using GhisTrader.FinancialModelingPrepAPI.Services;
 
 public class MajorIndexListingViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
-    private readonly IMajorIndexService? majorIndexService;
+    private readonly IFinancialModelingPrepService? financialModelingPrepService;
     private MajorIndex dowJones;
     public MajorIndex DowJones
     {
@@ -65,9 +66,9 @@ public class MajorIndexListingViewModel : INotifyPropertyChanged
 
     public ICommand LoadMajorIndexesCommand { get; }
 
-    public MajorIndexListingViewModel(IMajorIndexService majorIndexService)
+    public MajorIndexListingViewModel(IFinancialModelingPrepService financialModelingPrepService)
     {
-        this.majorIndexService = majorIndexService;
+        this.financialModelingPrepService = financialModelingPrepService;
         this.LoadMajorIndexesCommand = new RelayCommand(this.ExecuteLoadMajorIndexes, () => true);
     }
 
@@ -80,9 +81,9 @@ public class MajorIndexListingViewModel : INotifyPropertyChanged
         this.IsLoading = false;
     }
 
-    public static MajorIndexListingViewModel LoadMajorIndexViewModel(IMajorIndexService majorIndexService)
+    public static MajorIndexListingViewModel LoadMajorIndexViewModel(IFinancialModelingPrepService financialModelingPrepService)
     {
-        MajorIndexListingViewModel majorIndexViewModel = new MajorIndexListingViewModel(majorIndexService);
+        MajorIndexListingViewModel majorIndexViewModel = new MajorIndexListingViewModel(financialModelingPrepService);
 
         majorIndexViewModel.LoadMajorIndexesCommand.Execute(null);
 
@@ -93,16 +94,16 @@ public class MajorIndexListingViewModel : INotifyPropertyChanged
 
     private async Task LoadDowJones()
     {
-        this.DowJones = await this.majorIndexService!.GetMajorIndex(MajorIndexType.DowJones);
+        this.DowJones = await this.financialModelingPrepService!.GetMajorIndex(MajorIndexType.DowJones);
     }
 
     private async Task LoadNasdaq()
     {
-        this.Nasdaq = await this.majorIndexService!.GetMajorIndex(MajorIndexType.Nasdaq);
+        this.Nasdaq = await this.financialModelingPrepService!.GetMajorIndex(MajorIndexType.Nasdaq);
     }
 
     private async Task LoadSP500()
     {
-        this.SP500 = await this.majorIndexService!.GetMajorIndex(MajorIndexType.SP500);
+        this.SP500 = await this.financialModelingPrepService!.GetMajorIndex(MajorIndexType.SP500);
     }
 }

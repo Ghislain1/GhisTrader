@@ -6,17 +6,21 @@
 //  writing by an officer of Ghis. All Rights Reserved.
 // </copyright>
 
-namespace GhisTrader.Domain
-{
-    using GhisTrader.Domain.Models;
+namespace GhisTrader.FinancialModelingPrepAPI;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
 
-    public interface IMajorIndexService
-    {
-        Task<MajorIndex> GetMajorIndex(MajorIndexType indexType);
-    }
-}
+    
+        public class FinancialModelingPrepAPIKey
+        {
+            public string Key { get; }
+
+            public FinancialModelingPrepAPIKey(string key)
+            {
+                Key = key;
+            }
+        }
+ 

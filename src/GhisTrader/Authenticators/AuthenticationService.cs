@@ -75,7 +75,6 @@ public class AuthenticationService2 : IAuthenticationService2
             {
                 Email = email,
                 Username = username,
-
                 DatedJoined = DateTime.Now
             };
             string hashedPassword = this.passwordHasher.HashPassword(user, password);

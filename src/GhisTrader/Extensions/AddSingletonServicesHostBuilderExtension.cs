@@ -13,6 +13,7 @@ using GhisTrader.Domain;
 using GhisTrader.Domain.Models;
 using GhisTrader.EntityFramework.Factory;
 using GhisTrader.EntityFramework.Services;
+using GhisTrader.FinancialModelingPrepAPI.Services;
 using GhisTrader.Navigators;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
@@ -43,10 +44,11 @@ public static class AddSingletonServicesHostBuilderExtension
             services.AddSingleton<IAuthenticationService2, AuthenticationService2>();
             services.AddSingleton<IDataService<Account>, AccountDataService>();
             services.AddSingleton<IAccountService, AccountDataService>();
-            services.AddSingleton<IStockPriceService, StockPriceService>();
+            //services.AddSingleton<IStockPriceService, StockPriceService>();
+            services.AddSingleton<IFinancialModelingPrepService, FinancialModelingPrepService>();
             //services.AddSingleton<IBuyStockService, BuyStockService>();
             //services.AddSingleton<ISellStockService, SellStockService>();
-            services.AddSingleton<IMajorIndexService, MajorIndexService>();
+           // services.AddSingleton<IMajorIndexService, MajorIndexService>();
 
 
 

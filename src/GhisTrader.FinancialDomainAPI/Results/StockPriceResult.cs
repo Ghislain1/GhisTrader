@@ -6,10 +6,15 @@
 //  writing by an officer of Ghis. All Rights Reserved.
 // </copyright>
 
-namespace GhisTrader.FinancialDomainAPI
-{
-    public class Class1
-    {
+namespace GhisTrader.FinancialModelingPrepAPI.Results;
 
-    }
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+public class StockPriceResult
+{
+    public double Price { get; set; }
 }

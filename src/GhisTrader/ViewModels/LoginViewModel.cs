@@ -87,7 +87,7 @@ public class LoginViewModel : INotifyPropertyChanged
 
         try
         {
-            await this.authenticator?.Login(this.Username!, this.Password!);
+            await this.authenticator?.Login(this.Username!, this.Password!)!;
 
             this.loginRenavigator?.Renavigate();
         }
@@ -99,9 +99,9 @@ public class LoginViewModel : INotifyPropertyChanged
         {
             this.ErrorMessage = "Incorrect password.";
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            this.ErrorMessage = "Login failed.";
+            this.ErrorMessage = "Login failed."+ ex.Message;
         }
     }
 

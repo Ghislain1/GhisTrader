@@ -11,6 +11,7 @@ namespace GhisTrader.Extensions;
 using GhisTrader.Authenticators;
 using GhisTrader.Domain;
 using GhisTrader.Factory;
+using GhisTrader.FinancialModelingPrepAPI.Services;
 using GhisTrader.Navigators;
 using GhisTrader.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
@@ -60,7 +61,7 @@ public static class AddViewModelsHostBuilderExtension
     {
         return new HomeViewModel(
             services.GetRequiredService<AssetSummaryViewModel>(),
-            MajorIndexListingViewModel.LoadMajorIndexViewModel(services.GetRequiredService<IMajorIndexService>()));
+            MajorIndexListingViewModel.LoadMajorIndexViewModel(services.GetRequiredService<IFinancialModelingPrepService>()));
     }
 
     private static LoginViewModel CreateLoginViewModel(IServiceProvider services)
