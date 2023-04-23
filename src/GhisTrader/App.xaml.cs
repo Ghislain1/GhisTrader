@@ -54,6 +54,7 @@ public partial class App : Application
 
             // Load the entities into EF Core
             appUserDbContext.AppUsers.Load();
+            var sd = appUserDbContext.Accounts;
         }
 
 

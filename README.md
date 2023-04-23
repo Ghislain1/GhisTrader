@@ -11,4 +11,5 @@
     - Define Your own DbContext
 - Create 
     - dotnet ef migrations add NewMigration --project ..\GhisTrader.EntityFramework
+    - dotnet ef database update  --project ..\GhisTrader.EntityFramework --verbose
     - Start project and Target Project 
