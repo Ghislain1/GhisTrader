@@ -101,7 +101,7 @@ public class LoginViewModel : INotifyPropertyChanged
         }
         catch (Exception ex)
         {
-            this.ErrorMessage = "Login failed."+ ex.Message;
+            this.ErrorMessage = "Login failed." + ex.Message;
         }
     }
 

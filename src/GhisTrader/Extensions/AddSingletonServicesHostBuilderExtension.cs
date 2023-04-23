@@ -48,7 +48,7 @@ public static class AddSingletonServicesHostBuilderExtension
             services.AddSingleton<IFinancialModelingPrepService, FinancialModelingPrepService>();
             //services.AddSingleton<IBuyStockService, BuyStockService>();
             //services.AddSingleton<ISellStockService, SellStockService>();
-           // services.AddSingleton<IMajorIndexService, MajorIndexService>();
+            // services.AddSingleton<IMajorIndexService, MajorIndexService>();
 
 
 

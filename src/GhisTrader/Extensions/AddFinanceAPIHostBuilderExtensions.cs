@@ -28,7 +28,7 @@ public static class AddFinanceAPIHostBuilderExtensions
         {
             // "https://financialmodelingprep.com/api/v3/income-statement/AAPL?apikey=0afb2ef442b712afa5c85b022d5a1f6e"))
             var defaultApiKey = "0afb2ef442b712afa5c85b022d5a1f6e";
-            string apiKey = context.Configuration.GetValue<string>("FINANCE_API_KEY")?? defaultApiKey;
+            string apiKey = context.Configuration.GetValue<string>("FINANCE_API_KEY") ?? defaultApiKey;
 
             services.AddSingleton(new FinancialModelingPrepAPIKey(apiKey));
 

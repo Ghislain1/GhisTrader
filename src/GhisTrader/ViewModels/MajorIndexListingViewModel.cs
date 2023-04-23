@@ -24,27 +24,25 @@ public class MajorIndexListingViewModel : INotifyPropertyChanged
     public event PropertyChangedEventHandler? PropertyChanged;
     private readonly IFinancialModelingPrepService? financialModelingPrepService;
     private MajorIndex dowJones;
+    private MajorIndex nasdaq;
+    private MajorIndex sp500;
     public MajorIndex DowJones
     {
-        get
-        {
-            return this.dowJones;
-        }
+        get        => this.dowJones;        
         set => this.InvokePropertyChanged(this.PropertyChanged, ref this.dowJones, value);
 
     }
 
-    private MajorIndex nasdaq;
+ 
     public MajorIndex Nasdaq
     {
-        get
-        {
-            return this.nasdaq;
-        }
+        get=>
+        this.nasdaq;
+        
         set => this.InvokePropertyChanged(this.PropertyChanged, ref this.nasdaq, value);
     }
 
-    private MajorIndex sp500;
+   
     public MajorIndex SP500
     {
         get

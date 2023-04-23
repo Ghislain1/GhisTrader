@@ -28,7 +28,7 @@ using System.Windows;
 public partial class App : Application
 {
     private readonly IHost? host;
-    private readonly ITraderDbContextFactory ?traderDbContextFactory  ;
+    private readonly ITraderDbContextFactory? traderDbContextFactory;
     public App()
     {
         this.host = CreateHostBuider().Build();
@@ -50,10 +50,10 @@ public partial class App : Application
         // DB Migration
         using (var appUserDbContext = this.traderDbContextFactory!.CreateAppUserDbContext())
         {
-            await  appUserDbContext.Database.EnsureCreatedAsync();
+            await appUserDbContext.Database.EnsureCreatedAsync();
 
             // Load the entities into EF Core
-             appUserDbContext.AppUsers.Load();
+            appUserDbContext.AppUsers.Load();
         }
 
 

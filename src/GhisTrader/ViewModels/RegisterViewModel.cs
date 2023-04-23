@@ -30,7 +30,7 @@ public class RegisterViewModel : INotifyPropertyChanged
     private string? errorMessage;
     private string? confirmPassword;
     public RegisterViewModel(IAuthenticator authenticator, IRenavigator registerRenavigator, IRenavigator loginRenavigator)
-    {     
+    {
 
         this.authenticator = authenticator;
         this.registerRenavigator = registerRenavigator;
@@ -120,7 +120,7 @@ public class RegisterViewModel : INotifyPropertyChanged
 
     public string? Username
     {
-        get=>       this.username;
+        get => this.username;
         set
         {
             if (this.InvokePropertyChanged(this.PropertyChanged, ref this.username, value))
@@ -145,7 +145,7 @@ public class RegisterViewModel : INotifyPropertyChanged
 
     }
 
-  
+
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
