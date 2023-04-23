@@ -38,10 +38,9 @@ jobs:
           dotnet build
         
         # Testing your code
-      - name: Testing Ur Code(with the dotnet CLI)
+      - name: Testing Ur Code(with the dotnet CLI on GhisTrader.sln)
         run: |
-          dir
-          cd ..
+          dir      
           dotnet test
  
       - name: Generate changelog
