@@ -1,3 +1,4 @@
+# https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 name: main
 
 on: [push, pull_request] # Trigger when someone pushs or dens PR
@@ -6,26 +7,42 @@ on: [push, pull_request] # Trigger when someone pushs or dens PR
 jobs:
   release:
     runs-on: windows-latest
+    strategy:
+      matrix:
+        dotnet-version: [ '6.0.x', '7.0.x' ]
     env:
       DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
       DOTNET_NOLOGO: true
       DOTNET_CLI_TELEMETRY_OPTOUT: true
 
     steps:
-      - name: Checkout
+      - name: Checkout Ur Code
         uses: actions/checkout@v3
 
       - name: Install .NET
-        uses: actions/setup-dotnet@v2
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 6.0.x
 
-      - name: Publish (Release Mode)
+      # You can test your matrix by printing the current dotnet version
+      - name: Display dotnet version
+        run: dotnet --version
+
+        # Building  your code
+      - name: Building Ur Code
         run: |
           dir
           cd ./src/GhisTrader
-          dotnet publish -v d  -o ${{ github.workspace }}/bin/Publish --configuration Release -r win-x64 --self-contained true /p:PublishSingleFile=true /p:PublishReadyToRun=true
+          dotnet build
+        
+        # Testing your code
+      - name: Testing Ur Code(with the dotnet CLI)
+        run: |
+          dir
+          cd ..
+          dotnet test
 
+ 
       - name: Generate changelog
         run: echo "#Good things are comming" > ${{github.workspace}}-CHANGELOG.txt
 
@@ -38,10 +55,4 @@ jobs:
           echo  "event_name ====> ${{github.event_name}}"
           more  ${{github.workspace}}-CHANGELOG.txt
 
-      - name: Publish your  Release
-        uses: actions/upload-artifact@v3
-        with:
-          name: GhisTrader
-          path: ${{ github.workspace }}/bin/Publish
-          if-no-files-found: error # 'warn' or 'ignore' are also available, defaults to `warn`
-  
+      
