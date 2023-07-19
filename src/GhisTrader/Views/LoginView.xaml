@@ -93,6 +93,7 @@
         <Button Grid.Row="3"
                 Margin="0 10 0 0"
                 HorizontalAlignment="Center"
+                AutomationProperties.AutomationId="ViewRegisterCommandButton"
                 Background="Transparent"
                 Command="{Binding ViewRegisterCommand}"
                 Content="Don't have an account?"

@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GhisTrader.EntityFramework.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GhisTrader.FinancialModelingPrepAPI.Tests", "tests\GhisTrader.Tests\GhisTrader.FinancialModelingPrepAPI.Tests.csproj", "{6EA49868-C475-4984-BEF6-8A6F4003404F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GhisTrader.tests.e2e", "tests\GhisTrader.tests.e2e\GhisTrader.tests.e2e.csproj", "{99217A72-7163-4327-9C0A-38FC1C765779}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{6EA49868-C475-4984-BEF6-8A6F4003404F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EA49868-C475-4984-BEF6-8A6F4003404F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EA49868-C475-4984-BEF6-8A6F4003404F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99217A72-7163-4327-9C0A-38FC1C765779}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99217A72-7163-4327-9C0A-38FC1C765779}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99217A72-7163-4327-9C0A-38FC1C765779}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99217A72-7163-4327-9C0A-38FC1C765779}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
